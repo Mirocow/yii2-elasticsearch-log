@@ -10,10 +10,10 @@ use mirocow\elasticsearch\components\indexes\AbstractSearchIndex;
 class LogTargetIndex extends AbstractSearchIndex
 {
     /** @var string */
-    public $index_name = 'index_log';
+    public $index_name = 'yii';
 
     /** @var string */
-    public $index_type = 'yii';
+    public $index_type = 'log';
 
     /** @inheritdoc */
     public function accepts($document)

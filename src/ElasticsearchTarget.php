@@ -98,7 +98,7 @@ class ElasticsearchTarget extends Target
     /**
      * @inheritdoc
      */
-    private function export()
+    public function export()
     {
         $params = [];
 
