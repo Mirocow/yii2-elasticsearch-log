@@ -2,7 +2,6 @@
 namespace mirocow\elasticsearch\log;
 
 use mirocow\elasticsearch\components\indexes\AbstractSearchIndex;
-use mirocow\elasticsearch\exceptions\SearchIndexerException;
 
 /**
  * Class LogTargetIndex
@@ -58,73 +57,11 @@ class LogTargetIndex extends AbstractSearchIndex
                                 'split_on_numerics' => true,
                                 'stem_english_possessive' => true // `s
                             ],
-                            'fulltext_index_ngram_filter' => [
-                                'type' => 'edge_ngram',
-                                'min_gram' => '2',
-                                'max_gram' => '20',
-                            ],
-
-                            /**
-                             * Russian
-                             */
-
-                            "russian_stop" => [
-                                "type" => "stop",
-                                "stopwords" => "_russian_",
-                            ],
-                            "russian_keywords" => [
-                                "type" => "keyword_marker",
-                                "keywords" => ["пример"],
-                            ],
-                            "russian_stemmer" => [
-                                "type" => "stemmer",
-                                "language" => "russian",
-                            ],
-
-                            /**
-                             * English
-                             */
-
-                            "english_stop" => [
-                                "type" => "stop",
-                                "stopwords" => "_english_",
-                            ],
-                            "english_keywords" => [
-                                "type" => "keyword_marker",
-                                "keywords" => ["example"],
-                            ],
-                            "english_stemmer" => [
-                                "type" => "stemmer",
-                                "language" => "english",
-                            ],
-                            "english_possessive_stemmer" => [
-                                "type" => "stemmer",
-                                "language" => "possessive_english",
-                            ],
                         ],
                         // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analyzer.html
                         // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-analyzer.html
                         'analyzer' => [
                             // victoria's, victorias, victoria
-                            'autocomplete' => [
-                                'type' => 'custom',
-                                'tokenizer' => 'standard',
-                                'filter' => [
-                                    // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-standard-tokenfilter.html
-                                    'standard',
-                                    // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lowercase-tokenizer.html
-                                    'lowercase',
-                                    // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-stop-tokenfilter.html
-                                    'stop',
-                                    // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-asciifolding-tokenfilter.html
-                                    'asciifolding',
-                                    // https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-porterstem-tokenfilter.html
-                                    'porter_stem',
-                                    //'english_stemmer',
-                                    //'russian_stemmer',
-                                    '_delimiter',
-                                ],
-                            ],
                             'search_analyzer' => [
                                 'type' => 'custom',
                                 'tokenizer' => 'standard',
@@ -166,7 +103,6 @@ class LogTargetIndex extends AbstractSearchIndex
                 ],
                 'mappings' => [
                     $this->type() => [
-                        // Определяет базовый набор свойств для группы полей
                         'dynamic_templates' => [
                             [
                                 'attributes' => [
@@ -177,24 +113,64 @@ class LogTargetIndex extends AbstractSearchIndex
                                 ],
                             ],
                         ],
-                        // При индексировании поля _all все поля документа объединяются в одну большую строку независимо от типа данных.
-                        // По умолчанию поле _all включено.
                         "_all" => [
                             "enabled" => false
                         ],
                         'properties' => [
 
-                            // Возвращаемые данные, не индексируются
-                            // Заполняет модель методом populate
-                            // Не индексируется
                             'attributes' => [
                                 'properties' => [
-                                    'created_at' => [
+                                    '@timestamp' => [
                                         "type" => "date",
                                         // 2016-12-28 16:21:30
                                         "format" => "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis",
                                     ],
                                 ],
+                            ],
+
+                            'category' => [
+                                'type' => 'text',
+                                'search_analyzer' => 'search_analyzer',
+                                'analyzer' => 'search_analyzer',
+                            ],
+
+                            'level' => [
+                                'type' => 'keyword',
+                            ],
+
+                            '@timestamp' => [
+                                'type' => 'text',
+                            ],
+
+                            'trace' => [
+                                'type' => 'text',
+                                'search_analyzer' => 'search_analyzer',
+                                'analyzer' => 'search_analyzer',
+                            ],
+
+                            'message' => [
+                                'type' => 'text',
+                                'search_analyzer' => 'search_analyzer',
+                                'analyzer' => 'search_analyzer',
+                            ],
+
+                            'exception' => [
+                                'properties' => [
+                                    'file' => [
+                                        'type' => 'text',
+                                    ],
+                                    'line' => [
+                                        'type' => 'integer',
+                                    ],
+                                    'code' => [
+                                        'type' => 'integer',
+                                    ],
+                                    'trace' => [
+                                        'type' => 'text',
+                                        'search_analyzer' => 'search_analyzer',
+                                        'analyzer' => 'search_analyzer',
+                                    ],
+                                ]
                             ],
 
                         ],

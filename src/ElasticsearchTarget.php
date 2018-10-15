@@ -13,7 +13,6 @@ use yii\log\Target;
  * Elasticsearch Yii2 Log Target
  *
  * @author Mirocow <mr.mirocow@gmail.com>
- * @since 2.0
  */
 class ElasticsearchTarget extends Target
 {
@@ -33,6 +32,11 @@ class ElasticsearchTarget extends Target
     public $db;
 
     /**
+     * @var ExtraFields[] $extraFields
+     */
+    private $_extraFields = [];
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -50,16 +54,27 @@ class ElasticsearchTarget extends Target
     }
 
     /**
-     * @inheritdoc
+     * Returns extra fields
+     * @return array
      */
-    public function export()
+    public function getExtraFields()
     {
-        $messages = array_map([$this, 'prepareMessage'], $this->messages);
+        return $this->_extraFields;
+    }
 
-        $body = implode("\n", $messages) . "\n";
-
-        /** @var QueryBuilder $query */
-        $query = $this->db->execute($body, 'bulk');
+    /**
+     * Set extra fields
+     * @param array $fields
+     */
+    public function setExtraFields(array $fields)
+    {
+        foreach ($fields as $name => $field) {
+            if ($field instanceof \Closure || is_array($field) && is_callable($field)) {
+                $this->_extraFields[$name] = call_user_func($field, Yii::$app);
+            } else {
+                $this->_extraFields[$name] = $field;
+            }
+        }
     }
 
     /**
@@ -81,11 +96,32 @@ class ElasticsearchTarget extends Target
     }
 
     /**
+     * @inheritdoc
+     */
+    private function export()
+    {
+        $params = [];
+
+        foreach ($this->messages as $message){
+            $params['body'][] = [
+                'index' => [
+                    '_index' => $this->index,
+                    '_type' => $this->type,
+                ]
+            ];
+
+            $params['body'][] = $this->prepareMessage($message);
+        }
+
+        $this->db->execute($params, 'bulk');
+    }
+
+    /**
      * Prepares a log message
      * @param array $message The log message to be formatted
      * @return string
      */
-    public function prepareMessage($message)
+    private function prepareMessage($message)
     {
         list($text, $level, $category, $timestamp) = $message;
 
@@ -113,34 +149,8 @@ class ElasticsearchTarget extends Target
             $result['message'] = VarDumper::export($text);
         }
 
-        $result = array_merge($result, $this->getExtraFields());
+        return array_merge($result, $this->getExtraFields());
 
-        return Json::encode($result);
     }
 
-    private $_extraFields = [];
-
-    /**
-     * Returns extra fields
-     * @return array
-     */
-    public function getExtraFields()
-    {
-        return $this->_extraFields;
-    }
-
-    /**
-     * Set extra fields
-     * @param array $fields
-     */
-    public function setExtraFields(array $fields)
-    {
-        foreach ($fields as $name => $field) {
-            if ($field instanceof \Closure || is_array($field) && is_callable($field)) {
-                $this->_extraFields[$name] = call_user_func($field, Yii::$app);
-            } else {
-                $this->_extraFields[$name] = $field;
-            }
-        }
-    }
 }
