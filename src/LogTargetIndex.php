@@ -17,6 +17,24 @@ class LogTargetIndex extends AbstractSearchIndex
     public $index_type = 'yii';
 
     /** @inheritdoc */
+    public function accepts($document)
+    {
+        return true;
+    }
+
+    /** @inheritdoc */
+    public function documentIds()
+    {
+        return [];
+    }
+
+    /** @inheritdoc */
+    public function documentCount()
+    {
+        return 0;
+    }
+
+    /** @inheritdoc */
     protected function indexConfig(): array
     {
         return [

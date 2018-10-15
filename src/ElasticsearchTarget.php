@@ -1,8 +1,8 @@
 <?php
 namespace mirocow\elasticsearch\log;
 
+use mirocow\elasticsearch\components\factories\IndexerFactory;
 use Yii;
-use yii\di\Instance;
 use yii\elasticsearch\Connection;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
@@ -38,7 +38,14 @@ class ElasticsearchTarget extends Target
     public function init()
     {
         parent::init();
-        $this->db = IndexerFactory::createIndex(LogTargetIndex::class);
+        $config = [
+            LogTargetIndex::class => [
+                'class' => LogTargetIndex::class,
+                'index_name' => $this->index,
+                'index_type' => $this->type,
+            ]
+        ];
+        $this->db = IndexerFactory::createIndex(LogTargetIndex::class, $config);
         $this->db->create(true);
     }
 
@@ -52,7 +59,7 @@ class ElasticsearchTarget extends Target
         $body = implode("\n", $messages) . "\n";
 
         /** @var QueryBuilder $query */
-        $query = $this->db->search($body, 'bulk');
+        $query = $this->db->execute($body, 'bulk');
     }
 
     /**
@@ -108,14 +115,7 @@ class ElasticsearchTarget extends Target
 
         $result = array_merge($result, $this->getExtraFields());
 
-        $message = implode("\n", [
-            Json::encode([
-                'index' => new \stdClass()
-            ]),
-            Json::encode($result)
-        ]);
-
-        return $message;
+        return Json::encode($result);
     }
 
     private $_extraFields = [];
