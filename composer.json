@@ -1,0 +1,21 @@
+{
+  "name": "mirocow/yii2-elasticsearch-log",
+  "description": "Yii2 elasticsearch log storage",
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://github.com/mirocow/yii2-elasticsearch-log",
+    "source": "https://github.com/mirocow/yii2-elasticsearch-log"
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": ">=2.0.0",
+    "mirocow/yii2-elasticsearch": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "mirocow\\elasticsearch\\log\\": "src"
+    }
+  }
+}
