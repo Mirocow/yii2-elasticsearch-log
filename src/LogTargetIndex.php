@@ -122,8 +122,9 @@ class LogTargetIndex extends AbstractSearchIndex
                                 'properties' => [
                                     '@timestamp' => [
                                         "type" => "date",
-                                        // 2016-12-28 16:21:30
-                                        "format" => "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis",
+                                        // 2018-10-16 05:13:47
+                                        // YYYY-MM-DD HH:mm:ss
+                                        "format" => "yyyy-MM-dd HH:mm:ss",
                                     ],
                                 ],
                             ],

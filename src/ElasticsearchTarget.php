@@ -128,7 +128,9 @@ class ElasticsearchTarget extends Target
         $result = [
             'category' => $category,
             'level' => Logger::getLevelName($level),
-            '@timestamp' => date('c', $timestamp),
+            'attributes'=> [
+                '@timestamp' => date('Y-m-d h:i:s', $timestamp),
+            ]
         ];
 
         if (isset($message[4])) {
