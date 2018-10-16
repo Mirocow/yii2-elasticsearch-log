@@ -139,10 +139,6 @@ class LogTargetIndex extends AbstractSearchIndex
                                 'type' => 'keyword',
                             ],
 
-                            '@timestamp' => [
-                                'type' => 'text',
-                            ],
-
                             'trace' => [
                                 'type' => 'text',
                                 'search_analyzer' => 'search_analyzer',
