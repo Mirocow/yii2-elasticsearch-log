@@ -1,5 +1,8 @@
 # Elasticsearch log storage module based on mirocow/yii2-elasticsearch
 
+[![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/v/stable)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) 
+[![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/v/unstable)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) 
+[![Total Downloads](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/downloads)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) [![License](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/license)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fdb8ceb634a97a184f90/maintainability)](https://codeclimate.com/github/Mirocow/yii2-elasticsearch-log/maintainability)
 
 Docs are available in english and [russian](README.ru.md).
