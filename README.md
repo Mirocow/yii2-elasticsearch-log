@@ -7,3 +7,8 @@ Docs are available in english and [russian](README.ru.md).
 ```bash
 $ composer require --prefer-dist mirocow/yii2-elasticsearch-log
 ```
+
+# Tutorial
+
+How we can use Discover, Visualization and Dashboard with cusom data
+* https://www.youtube.com/watch?v=imrKm6dV3NQ
