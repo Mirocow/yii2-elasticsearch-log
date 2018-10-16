@@ -1,5 +1,7 @@
-# Позволяет индексировать логи yii2
+# Позволяет индексировать логи из yii2 в Elasticsearch
 Работает в паре с Mirocow/yii2-elasticsearch](https://github.com/Mirocow/yii2-elasticsearch)
+Выод удобно проссмаривать и администрировать с помощью Kibana
+Формат даты предоставляется в виде *YYYY-MM-DD HH:mm:ss*
 
 Docs are available in russian and [enlish](README.md).
 
