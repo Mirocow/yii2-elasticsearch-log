@@ -1,5 +1,7 @@
 # Elasticsearch log storage module based on mirocow/yii2-elasticsearch
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/fdb8ceb634a97a184f90/maintainability)](https://codeclimate.com/github/Mirocow/yii2-elasticsearch-log/maintainability)
+
 Docs are available in english and [russian](README.ru.md).
 
 * Conclusion is easy to review and administer using Kibana
