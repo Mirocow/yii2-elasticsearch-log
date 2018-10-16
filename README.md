@@ -26,6 +26,7 @@ return [
         ],
     ],
 ];
+```
 
 # Tutorial
 
