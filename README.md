@@ -15,4 +15,4 @@ How we can use Discover, Visualization and Dashboard with cusom data
 
 # Depends
 
-* [Mirocow/yii2-elasticsearch](Mirocow/yii2-elasticsearch)
+* [Mirocow/yii2-elasticsearch](https://github.com/Mirocow/yii2-elasticsearch)
