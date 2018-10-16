@@ -12,3 +12,7 @@ $ composer require --prefer-dist mirocow/yii2-elasticsearch-log
 
 How we can use Discover, Visualization and Dashboard with cusom data
 * https://www.youtube.com/watch?v=imrKm6dV3NQ
+
+# Depends
+
+* [Mirocow/yii2-elasticsearch](Mirocow/yii2-elasticsearch)
