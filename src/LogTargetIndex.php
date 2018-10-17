@@ -14,6 +14,9 @@ class LogTargetIndex extends AbstractSearchIndex
 
     /** @var string */
     public $index_type = 'log';
+    
+    /** @var string @see https://www.elastic.co/guide/en/elasticsearch/reference/5.6/mapping-date-format.html */
+    public $formatTime = 'yyyy-MM-dd HH:mm:ss';
 
     /** @inheritdoc */
     public function accepts($document)
@@ -122,9 +125,7 @@ class LogTargetIndex extends AbstractSearchIndex
                                 'properties' => [
                                     '@timestamp' => [
                                         "type" => "date",
-                                        // 2018-10-16 05:13:47
-                                        // YYYY-MM-DD HH:mm:ss
-                                        "format" => "yyyy-MM-dd HH:mm:ss",
+                                        "format" => $this->formatTime,
                                     ],
                                 ],
                             ],
