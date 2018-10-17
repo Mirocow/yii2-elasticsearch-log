@@ -6,7 +6,7 @@
 * Вывод удобно проссмаривать и администрировать с помощью Kibana
 * Формат даты предоставляется в виде *YYYY-MM-DD HH:mm:ss*
 
-Docs are available in russian and [enlish](README.md).
+Docs are available in russian and [english](README.md).
 
 # Установка
 
