@@ -1,7 +1,6 @@
 # Elasticsearch log storage module based on mirocow/yii2-elasticsearch
 
 [![Latest Stable Version](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/v/stable)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirocow%2Fyii2-elasticsearch-log.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirocow%2Fyii2-elasticsearch-log?ref=badge_shield)
-
 [![Latest Unstable Version](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/v/unstable)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) 
 [![Total Downloads](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/downloads)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log) [![License](https://poser.pugx.org/mirocow/yii2-elasticsearch-log/license)](https://packagist.org/packages/mirocow/yii2-elasticsearch-log)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fdb8ceb634a97a184f90/maintainability)](https://codeclimate.com/github/Mirocow/yii2-elasticsearch-log/maintainability)
