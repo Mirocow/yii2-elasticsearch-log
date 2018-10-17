@@ -25,6 +25,11 @@ class ElasticsearchTarget extends Target
      * @var string Elasticsearch type name
      */
     public $type = 'log';
+    
+    /**
+     * @var string DateTime format
+     */    
+    public $formatTime = 'Y-m-d H:i:s';
 
     /**
      * @var LogTargetIndex
@@ -129,7 +134,7 @@ class ElasticsearchTarget extends Target
             'category' => $category,
             'level' => Logger::getLevelName($level),
             'attributes'=> [
-                '@timestamp' => date('Y-m-d h:i:s', $timestamp),
+                '@timestamp' => date($this->formatTime, $timestamp),
             ]
         ];
 
