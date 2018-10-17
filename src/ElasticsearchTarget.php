@@ -130,11 +130,14 @@ class ElasticsearchTarget extends Target
     {
         list($text, $level, $category, $timestamp) = $message;
 
+        $given = \DateTime::createFromFormat('U.u', $timestamp);
+        $given->setTimezone(new \DateTimeZone("UTC"));
+
         $result = [
             'category' => $category,
             'level' => Logger::getLevelName($level),
             'attributes'=> [
-                '@timestamp' => date($this->formatTime, $timestamp),
+                '@timestamp' => $given->format($this->formatTime),
             ]
         ];
 
