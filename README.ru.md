@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/fdb8ceb634a97a184f90/maintainability)](https://codeclimate.com/github/Mirocow/yii2-elasticsearch-log/maintainability)
 
 * Вывод удобно проссмаривать и администрировать с помощью Kibana
-* Формат даты предоставляется в виде *YYYY-MM-DD HH:mm:ss*
+* Формат даты предоставляется в виде *YYYY-MM-DD HH:mm:ss* и должно быть в UTC
 
 Docs are available in russian and [english](README.md).
 

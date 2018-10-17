@@ -8,7 +8,7 @@
 Docs are available in english and [russian](README.ru.md).
 
 * Conclusion is easy to review and administer using Kibana
-* The date format is provided in the form *YYYY-MM-DD HH:mm:ss*
+* The date format is provided in the form *YYYY-MM-DD HH:mm:ss* and must be UTC
 
 # Install
 
