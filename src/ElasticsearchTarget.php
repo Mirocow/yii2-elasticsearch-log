@@ -16,6 +16,10 @@ use yii\log\Target;
  */
 class ElasticsearchTarget extends Target
 {
+    public $hosts = [
+        'localhost:9200'
+    ];
+
     /**
      * @var string Elasticsearch index name
      */
@@ -52,6 +56,7 @@ class ElasticsearchTarget extends Target
                 'class' => LogTargetIndex::class,
                 'index_name' => $this->index,
                 'index_type' => $this->type,
+                'hosts' => $this->hosts,
             ]
         ];
         $this->db = IndexerFactory::createIndex(LogTargetIndex::class, $config);

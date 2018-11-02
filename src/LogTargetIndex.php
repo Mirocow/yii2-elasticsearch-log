@@ -9,6 +9,10 @@ use mirocow\elasticsearch\components\indexes\AbstractSearchIndex;
  */
 class LogTargetIndex extends AbstractSearchIndex
 {
+    public $hosts = [
+        'localhost:9200'
+    ];
+
     /** @var string */
     public $index_name = 'yii';
 
