@@ -11,7 +11,7 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": ">=2.0.0",
-    "mirocow/yii2-elasticsearch": ">=1.0.8"
+    "mirocow/yii2-elasticsearch": ">=1.0.9"
   },
   "autoload": {
     "psr-4": {
