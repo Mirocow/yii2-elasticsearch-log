@@ -1,5 +1,5 @@
 # Позволяет индексировать логи из yii2 в Elasticsearch
-Работает в паре с Mirocow/yii2-elasticsearch](https://github.com/Mirocow/yii2-elasticsearch)
+Работает в паре с [Mirocow/yii2-elasticsearch](https://github.com/Mirocow/yii2-elasticsearch)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/fdb8ceb634a97a184f90/maintainability)](https://codeclimate.com/github/Mirocow/yii2-elasticsearch-log/maintainability)
 
