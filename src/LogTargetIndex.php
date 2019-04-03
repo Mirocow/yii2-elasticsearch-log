@@ -40,6 +40,16 @@ class LogTargetIndex extends AbstractSearchIndex
         return 0;
     }
 
+    /**
+     * @param int $documentId
+     *
+     * @return mixed
+     */
+    public function addDocumentById(int $documentId)
+    {
+        return null;
+    }
+
     /** @inheritdoc */
     protected function indexConfig(): array
     {
