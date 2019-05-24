@@ -138,12 +138,22 @@ class ElasticsearchTarget extends Target
         $given = \DateTime::createFromFormat('U.u', $timestamp);
         $given->setTimezone(new \DateTimeZone("UTC"));
 
+        $user_id = 0;
+
+        if(!Yii::$app->request->isConsoleRequest){
+            if(!Yii::$app->user->isGuest) {
+                $user_id = Yii::$app->user->id;
+            }
+        }
+
         $result = [
             'category' => $category,
             'level' => Logger::getLevelName($level),
             'attributes'=> [
                 '@timestamp' => $given->format($this->formatTime),
-            ]
+            ],
+            'userId' => $user_id,
+            'ip' => Yii::$app->request->remoteIP,
         ];
 
         if (isset($message[4])) {
