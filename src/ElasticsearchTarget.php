@@ -139,11 +139,13 @@ class ElasticsearchTarget extends Target
         $given->setTimezone(new \DateTimeZone("UTC"));
 
         $user_id = 0;
+        $page = '';
 
         if(!Yii::$app->request->isConsoleRequest){
             if(!Yii::$app->user->isGuest) {
                 $user_id = Yii::$app->user->id;
             }
+            $page = Yii::$app->request->url;
         }
 
         $result = [
@@ -154,6 +156,7 @@ class ElasticsearchTarget extends Target
             ],
             'userId' => $user_id,
             'ip' => Yii::$app->request->remoteIP,
+            'page' => $page,
         ];
 
         if (isset($message[4])) {

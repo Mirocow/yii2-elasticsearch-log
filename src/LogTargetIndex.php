@@ -185,6 +185,20 @@ class LogTargetIndex extends AbstractSearchIndex
                                 ]
                             ],
 
+                            'userId' => [
+                                'type' => 'integer',
+                            ],
+
+                            'ip' => [
+                                'type' => 'integer',
+                            ],
+
+                            'page' => [
+                                'type' => 'text',
+                                'search_analyzer' => 'search_analyzer',
+                                'analyzer' => 'search_analyzer',
+                            ],
+
                         ],
                     ],
                 ],
