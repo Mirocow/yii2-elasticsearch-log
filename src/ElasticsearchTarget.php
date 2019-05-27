@@ -138,14 +138,18 @@ class ElasticsearchTarget extends Target
         $given = \DateTime::createFromFormat('U.u', $timestamp);
         $given->setTimezone(new \DateTimeZone("UTC"));
 
-        $user_id = 0;
+        $userId = 0;
         $page = '';
+        $remoteIp = '';
+        $remoteHost = 'localhost';
 
         if(!Yii::$app->request->isConsoleRequest){
             if(!Yii::$app->user->isGuest) {
-                $user_id = Yii::$app->user->id;
+                $userId = Yii::$app->user->id;
             }
-            $page = Yii::$app->request->url;
+            $page = Yii::$app->request->getUrl();
+            $remoteIp = Yii::$app->request->getRemoteIP();
+            $remoteHost = Yii::$app->request->getRemoteHost();
         }
 
         $result = [
@@ -154,8 +158,9 @@ class ElasticsearchTarget extends Target
             'attributes'=> [
                 '@timestamp' => $given->format($this->formatTime),
             ],
-            'userId' => $user_id,
-            'ip' => Yii::$app->request->remoteIP,
+            'userId' => $userId,
+            'remote_ip' => $remoteIp,
+            'remote_host' => $remoteHost,
             'page' => $page,
         ];
 

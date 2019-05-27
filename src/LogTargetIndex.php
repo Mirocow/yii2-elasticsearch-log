@@ -189,8 +189,12 @@ class LogTargetIndex extends AbstractSearchIndex
                                 'type' => 'integer',
                             ],
 
-                            'ip' => [
-                                'type' => 'integer',
+                            'remote_ip' => [
+                                'type' => 'keyword',
+                            ],
+
+                            'remote_host' => [
+                                'type' => 'keyword',
                             ],
 
                             'page' => [
