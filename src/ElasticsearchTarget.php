@@ -2,6 +2,7 @@
 namespace mirocow\elasticsearch\log;
 
 use mirocow\elasticsearch\components\factories\IndexerFactory;
+use mirocow\elasticsearch\exceptions\SearchQueryException;
 use Yii;
 use yii\elasticsearch\Connection;
 use yii\helpers\Json;
@@ -133,7 +134,7 @@ class ElasticsearchTarget extends Target
      */
     private function prepareMessage($message)
     {
-        list($text, $level, $category, $timestamp) = $message;
+        list($exception, $level, $category, $timestamp) = $message;
 
         $given = \DateTime::createFromFormat('U.u', $timestamp);
         $given->setTimezone(new \DateTimeZone("UTC"));
@@ -167,19 +168,21 @@ class ElasticsearchTarget extends Target
         if (isset($message[4])) {
             $result['trace'] = $message[4];
         }
-
-        if ($text instanceof \Exception) {
-            $result['message'] = $text->getMessage();
+        if ($exception instanceof SearchQueryException) {
+            $result['request'] = $exception->requestQuery;
+        }
+        if ($exception instanceof \Exception) {
+            $result['message'] = $exception->getMessage();
             $result['exception'] = [
-                'file' => $text->getFile(),
-                'line' => $text->getLine(),
-                'code' => $text->getCode(),
-                'trace' => $text->getTraceAsString(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'code' => $exception->getCode(),
+                'trace' => $exception->getTraceAsString(),
             ];
-        } elseif (is_string($text)) {
-            $result['message'] = $text;
+        } elseif (is_string($exception)) {
+            $result['message'] = $exception;
         } else {
-            $result['message'] = VarDumper::export($text);
+            $result['message'] = VarDumper::export($exception);
         }
 
         return array_merge($result, $this->getExtraFields());
