@@ -2,7 +2,7 @@
   "name": "mirocow/yii2-elasticsearch-log",
   "description": "Yii2 elasticsearch log storage",
   "type": "yii2-extension",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "support": {
     "issues": "https://github.com/mirocow/yii2-elasticsearch-log",
     "source": "https://github.com/mirocow/yii2-elasticsearch-log"
