@@ -144,8 +144,11 @@ class ElasticsearchTarget extends Target
         $remoteIp = '';
         $remoteHost = 'localhost';
         $request = [];
-        $params = [];
         $post = [];
+
+        foreach (Yii::$app->params as $param => $value){
+            $params[$param] = $value;
+        }
 
         if(!Yii::$app->request->isConsoleRequest){
             if(!Yii::$app->user->isGuest) {
@@ -155,7 +158,6 @@ class ElasticsearchTarget extends Target
             $remoteIp = Yii::$app->request->getRemoteIP();
             $remoteHost = Yii::$app->request->getRemoteHost();
             $request = Yii::$app->request->getQueryParams();
-            $params = Yii::$app->request->getParams();
             $post = Yii::$app->request->getBodyParams();
         }
 
@@ -186,7 +188,7 @@ class ElasticsearchTarget extends Target
                 'file' => $exception->getFile(),
                 'line' => $exception->getLine(),
                 'code' => $exception->getCode(),
-                'trace' => Json::encode($exception->getTrace(), JSON_PRETTY_PRINT),
+                'trace' => $exception->getTraceAsString(),
             ];
         } elseif (is_string($exception)) {
             $result['message'] = $exception;
